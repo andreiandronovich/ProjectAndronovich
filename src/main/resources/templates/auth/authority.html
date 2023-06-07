@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="utf-8">
+  <title>Display page</title>
+  <!-- Basic page styling -->
+  <link rel="stylesheet" type="text/css" href="" th:href="@{/css/authority.css}">
+</head>
+<body>
+
+
+<section class="user">
+  <div class="user_options-container">
+    <div class="user_options-text">
+      <div class="user_options-unregistered">
+        <h2 class="user_unregistered-title">Don't have an account?</h2>
+        <p class="user_unregistered-text">Banjo tote bag bicycle rights, High Life sartorial cray craft beer whatever street art fap.</p>
+        <button class="user_unregistered-signup" id="signup-button">Sign up</button>
+      </div>
+
+      <div class="user_options-registered">
+        <h2 class="user_registered-title">Have an account?</h2>
+        <p class="user_registered-text">Banjo tote bag bicycle rights, High Life sartorial cray craft beer whatever street art fap.</p>
+        <button class="user_registered-login" id="login-button">Login</button>
+      </div>
+    </div>
+
+    <div class="user_options-forms" id="user_options-forms">
+      <div class="user_forms-login">
+        <h2 class="forms_title">Login</h2>
+
+        <form class="forms_form" name="f" method="post" action="/process_login">
+          <fieldset class="forms_fieldset">
+            <div class="">
+              <input type="email" placeholder="Email" name="username" class="forms_field-input" required autofocus />
+            </div>
+            <div class="forms_field">
+              <input type="password" placeholder="Password" name="password" class="forms_field-input" required />
+            </div>
+          </fieldset>
+          <div class="forms_buttons">
+            <button type="button" class="forms_buttons-forgot">Forgot password?</button>
+            <input type="submit" value="Log In" class="forms_buttons-action">
+          </div>
+          <div th:if="${param.error}" style="color: red">
+            неправильные имя или пароль
+          </div>
+          <div th:if="${param.errorr}" style="color: red">
+            Такой Email существует
+          </div>
+        </form>
+
+      </div>
+      <div class="user_forms-signup">
+        <h2 class="forms_title">Sign Up</h2>
+
+        <form class="forms_form" th:method="POST" th:action="@{/authority/registration}"  th:object="${person}">
+          <fieldset class="forms_fieldset">
+            <div class="forms_field">
+              <input type="text" placeholder="Full Name" th:field="*{fullName}" class="forms_field-input" required />
+            </div>
+            <div class="forms_field">
+              <input type="email" placeholder="Email" th:field="*{username}" class="forms_field-input" required />
+            </div>
+            <div class="forms_field">
+              <input type="password" placeholder="Password" th:field="*{password}" class="forms_field-input" required />
+            </div>
+          </fieldset>
+          <div class="forms_buttons">
+            <input type="submit" value="Sign up" class="forms_buttons-action">
+          </div>
+          <div th:if="${param.errorr}" style="color: red">
+            Такой Email существует
+          </div>
+        </form>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<script type="text/javascript" src="" th:src="@{/js/authority.js}"></script>
+
+
+</body>
+</html>

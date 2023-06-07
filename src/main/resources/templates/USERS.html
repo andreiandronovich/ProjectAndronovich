@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+    <meta charset="UTF-8">
+    <title>USERS</title>
+  <link rel="stylesheet" type="text/css" href="/css/users.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+
+</head>
+<body>
+
+<div class="container">
+  <header class="d-flex justify-content-center py-3">
+    <ul class="nav nav-pills">
+      <li class="nav-item"><a href="/exhibition" class="nav-link active" aria-current="page">Home</a></li>
+      <li class="nav-item"><a href="/exhibition/favorites" class="nav-link" sec:authorize="hasRole('ROLE_USER')">Favourites</a></li>
+      <li class="nav-item"><a href="/exhibition/profile" class="nav-link" sec:authorize="hasRole('ROLE_USER')">Account</a></li>
+      <li class="nav-item"><a href="/exhibition/users" class="nav-link" sec:authorize="hasRole('ROLE_ADMIN')">Users</a></li>
+      <li class="nav-item"><a href="/authority" class="nav-link" sec:authorize="!isAuthenticated()">Log In</a></li>
+      <li class="nav-item"><a href="/logout" class="nav-link" sec:authorize="isAuthenticated()">Log Out</a></li>
+
+    </ul>
+  </header>
+</div>
+
+<div class="container">
+  <div class="row">
+    <div id="users" class="col-xs-12">
+      <ul class="list" th:each="person : ${people}">
+        <li class="list--list-item" >
+          <h3 class="name" th:text="${person.fullName}">Jonny Wayne</h3>
+          <p class="born" th:text="${person.date}">1986</p>
+          <p class="address" th:text="${person.address}">13 Oak St.</p>
+          <p class="address" th:text="${person.gender}">Gender</p>
+          <p class="address" th:text="${person.username}">Email</p>
+          <form th:method="DELETE" th:action="@{/exhibition/user/{id}(id=${person.getId()})}">
+            <div class="form-grp">
+              <button type="submit" >Delete account</button>
+            </div>
+          </form>
+
+        </li>
+      </ul>
+      <div class="no-result">No Results</div>
+      <ul class="pagination"></ul>
+    </div>
+  </div>
+</div>
+
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/lodash.js/2.4.1/lodash.min.js" ></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/list.js/1.5.0/list.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/list.pagination.js/0.1.1/list.pagination.js"></script>
+<script type="text/javascript"  th:src="@{/js/users.js}"></script>
+
+
+</body>
+</html>

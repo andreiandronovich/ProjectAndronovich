@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+  <meta charset="utf-8">
+  <title>Display page</title>
+
+    <link rel="stylesheet" type="text/css" href="/css/base.css">
+  <!-- User styling -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css">
+</head>
+<body>
+
+<div class="hero" id="top">
+  <div class="hero-image" th:style="'background-image :url(' + ${exhibition.getHeader()} + ');'"></div>
+  <h1 th:text="${exhibition.getArticle()}">Do more, with less.</h1>
+</div>
+
+
+<div class="container">
+  <header class="d-flex justify-content-center py-3">
+    <ul class="nav nav-pills">
+      <li class="nav-item"><a href="/exhibition" class="nav-link active" aria-current="page">Home</a></li>
+      <li class="nav-item"><a href="/exhibition/favorites" class="nav-link" sec:authorize="hasRole('ROLE_USER')">Favourites</a></li>
+      <li class="nav-item"><a href="/exhibition/profile" class="nav-link" sec:authorize="hasRole('ROLE_USER')">Account</a></li>
+      <li class="nav-item"><a href="/exhibition/users" class="nav-link" sec:authorize="hasRole('ROLE_ADMIN')">Users</a></li>
+      <li class="nav-item"><a href="/authority" class="nav-link" sec:authorize="!isAuthenticated()">Log In</a></li>
+      <li class="nav-item"><a href="/logout" class="nav-link" sec:authorize="isAuthenticated()">Log Out</a></li>
+
+    </ul>
+  </header>
+</div>
+
+
+<section id="vision">
+  <div class="content">
+    <h1 th:text="${exhibition.getArticle()}">We Have a Vision</h1>
+<h5 th:text="${exhibition.getText()}"></h5>
+  </div>
+</section>
+
+<section id="product">
+  <div class="content">
+    <h1> Что вас ждет на выставке </h1>
+<h5 th:text="${exhibition.getDescription()}"></h5>
+  </div>
+</section>
+
+<section id="products">
+  <div class="content">
+    <h1> Адрес выставки  </h1>
+    <h5 th:text="${exhibition.getAddress()}"></h5>
+  </div>
+</section>
+
+<section id="team">
+  <div class="content">
+    <h1> Стоимость </h1>
+    <h3 th:text="${exhibition.getAmount()}"> Amount</h3>
+  </div>
+</section>
+
+
+<form th:method="PATCH" th:action="@{/exhibition/favorite/{id}(id=${exhibition.getId()})}" th:object="${exhibition}">
+<section class="py-5 text-center container" sec:authorize="hasRole('ROLE_USER')">
+  <div class="row py-lg-5">
+    <div class="col-lg-6 col-md-8 mx-auto">
+      <p>
+        <button  type="submit"  class="btn btn-primary my-2" > Add to favorite </button>
+      </p>
+    </div>
+  </div>
+</section>
+</form>
+
+<section class="py-5 text-center container" sec:authorize="hasRole('ROLE_ADMIN')">
+  <div class="row py-lg-5">
+    <div class="col-lg-6 col-md-8 mx-auto">
+      <p>
+        <a th:href="@{/exhibition/{id}/edit(id=${exhibition.getId()})}" class="btn btn-primary my-2" >Edit exhibition</a>
+
+      <form th:method="DELETE" th:action="@{/exhibition/{id}(id=${exhibition.getId()})}">
+        <button type="submit" class="btn btn-secondary my-2">Delete exhibition</button>
+    </form>
+      </p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p> made by andrei andronovich </p>
+</footer>
+<!-- jQuery -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<!-- User scripts -->
+<script type="text/javascript" src="" th:src="@{/js/script.js}"></script>
+
+</body>
+</html>
+

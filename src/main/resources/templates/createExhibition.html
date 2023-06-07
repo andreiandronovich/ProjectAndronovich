@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+    <meta charset="UTF-8">
+    <title>Create Exhibition</title>
+    <link rel="stylesheet" type="text/css" href="/css/createExhibition.css">
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css">
+
+</head>
+<body>
+
+<form th:method="POST" th:action="@{/exhibition/create}" th:object="${exhibition}">
+    <div class="wrapper">
+        <div class="form-header">Create Exhibition <a href="/exhibition"><i class="fa fa-times close" > close </i></a></div>
+        <div class="form-grp">
+            <label>Введите название выставки </label>
+            <input type="text"  th:field="*{article}" id="fullName"/>
+        </div>
+        <div class="form-grp">
+            <label> Введите краткое описание выставки </label>
+            <input  type="text" th:field="*{description}" >
+        </div>
+        <div class="form-grp">
+            <label>Введите адрес выставки </label>
+            <input type="text" th:field="*{address}" >
+        </div>
+        <div class="form-grp">
+            <label> Дата проведения выставки</label>
+            <input type="date" th:field="*{date}" >
+        </div>
+        <div class="form-grp">
+            <label>Введите полное описание выставки </label>
+            <input type="text"  th:field="*{text}" >
+        </div>
+        <div class="form-grp">
+            <label>Введите стоимость выставки (text)</label>
+            <input type="text" th:field="*{amount}" >
+        </div>
+        <div class="form-grp">
+            <label>Введите URL картинки </label>
+            <input type="text" th:field="*{image}" >
+        </div>
+        <div class="form-grp">
+            <label>Введите URL картинки-шапки </label>
+            <input type="text" th:field="*{header}" >
+        </div>
+        <div class="form-grp">
+            <input type="submit" value="Create exhibition"/>
+        </div>
+    </div>
+</form>
+
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit Exhibition</title>
+    <link rel="stylesheet" type="text/css" href="/css/createExhibition.css">
+
+</head>
+<body>
+
+
+<form th:method="PATCH" th:action="@{/exhibition/{id}(id=${exhibition.getId()})}" th:object="${exhibition}">
+    <div class="wrapper">
+        <div class="form-header">Edit Exhibition <a href="/exhibition"><i class="fa fa-times close" > close </i></a></div>
+        <div class="form-grp">
+            <label>Введите название выставки </label>
+            <input type="text"  th:field="*{article}" id="fullName"/>
+        </div>
+        <div class="form-grp">
+            <label> Введите краткое описание выставки </label>
+            <input  type="text" th:field="*{description}" >
+        </div>
+        <div class="form-grp">
+            <label>Введите адрес выставки </label>
+            <input type="text" th:field="*{address}" >
+        </div>
+        <div class="form-grp">
+            <label> Дата проведения выставки</label>
+            <input type="date" th:field="*{date}" >
+        </div>
+        <div class="form-grp">
+            <label>Введите полное описание выставки </label>
+            <input type="text"  th:field="*{text}" >
+        </div>
+        <div class="form-grp">
+            <label>Введите стоимость выставки (text)</label>
+            <input type="text" th:field="*{amount}" >
+        </div>
+        <div class="form-grp">
+            <label>Введите URL картинки </label>
+            <input type="text" th:field="*{image}" >
+        </div>
+        <div class="form-grp">
+            <label>Введите URL картинки-шапки </label>
+            <input type="text" th:field="*{header}" >
+        </div>
+        <div class="form-grp">
+            <input type="submit" value="Update exhibition"/>
+        </div>
+    </div>
+</form>
+
+
+</body>
+</html>
